@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text with Deepgram</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎤 Speech to Text</h1>
+            <p>Powered by Deepgram API</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Recording Section -->
+            <section class="recording-section">
+                <div class="recording-controls">
+                    <button id="recordBtn" class="record-btn">
+                        <span class="record-icon">🎤</span>
+                        <span class="record-text">Start Recording</span>
+                    </button>
+                    <button id="stopBtn" class="stop-btn" disabled>
+                        <span class="stop-icon">⏹️</span>
+                        <span class="stop-text">Stop Recording</span>
+                    </button>
+                </div>
+                
+                <div class="recording-status">
+                    <div id="recordingIndicator" class="recording-indicator">
+                        <span class="status-text">Ready to record</span>
+                        <div class="audio-visualizer">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="audio-preview">
+                    <audio id="audioPreview" controls style="display: none;"></audio>
+                </div>
+            </section>
+
+            <!-- File Upload Section -->
+            <section class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-content">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload Audio File</h3>
+                        <p>Drag and drop an audio file here, or click to browse</p>
+                        <input type="file" id="fileInput" accept="audio/*" hidden>
+                        <button class="browse-btn" onclick="document.getElementById('fileInput').click()">
+                            Browse Files
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transcription Section -->
+            <section class="transcription-section">
+                <div class="transcription-header">
+                    <h2>Transcription Result</h2>
+                    <div class="transcription-actions">
+                        <button id="copyBtn" class="action-btn" disabled>
+                            <span>📋</span> Copy
+                        </button>
+                        <button id="downloadBtn" class="action-btn" disabled>
+                            <span>💾</span> Download
+                        </button>
+                        <button id="clearBtn" class="action-btn" disabled>
+                            <span>🗑️</span> Clear
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transcription-content">
+                    <div id="transcriptionResult" class="transcription-text">
+                        <div class="placeholder">
+                            <div class="placeholder-icon">🎯</div>
+                            <p>Your transcription will appear here...</p>
+                            <small>Record audio or upload a file to get started</small>
+                        </div>
+                    </div>
+                    
+                    <div id="transcriptionMeta" class="transcription-meta" style="display: none;">
+                        <div class="meta-item">
+                            <span class="meta-label">Confidence:</span>
+                            <span id="confidenceScore" class="meta-value">-</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Word Count:</span>
+                            <span id="wordCount" class="meta-value">-</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Duration:</span>
+                            <span id="audioDuration" class="meta-value">-</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Model:</span>
+                            <span id="modelUsed" class="meta-value">-</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Processing Indicator -->
+            <div id="processingIndicator" class="processing-indicator" style="display: none;">
+                <div class="spinner"></div>
+                <p>Processing audio with Deepgram...</p>
+            </div>
+        </main>
+
+        <!-- Status Messages -->
+        <div id="statusMessages" class="status-messages"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
